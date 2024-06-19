@@ -10,7 +10,6 @@
             "name": "default",
             "displayName": "Default configuration",
             "hidden": false,
-            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/Debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
