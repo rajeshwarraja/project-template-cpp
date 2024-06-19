@@ -1,5 +1,5 @@
 ---
-name: CI/CD
+name: CI-CD
 
 on:
   push:
@@ -11,13 +11,17 @@ on:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build
+      - name: Generate artifacts
         run: |
           cmake --preset default
           cmake --build --preset default
+
+      - name: Test artifacts
+        run: |
           ctest --preset default
