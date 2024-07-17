@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(CppTemplate VERSION 1.0 LANGUAGES CXX)
+project(Example VERSION 1.0 LANGUAGES CXX)
 
 option(USE_CLANG_TIDY "Use clang-tidy for static analysis" OFF)
 
