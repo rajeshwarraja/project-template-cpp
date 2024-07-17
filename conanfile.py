@@ -3,12 +3,12 @@ from conan.tools.cmake import CMake, CMakeToolchain, CMakeDeps, cmake_layout
 
 
 
-class TemplateConanFile(ConanFile):
-    name = "template"
+class Example(ConanFile):
+    name = "example"
     version = "0.1"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False, "fPIC": True}
+    options = {"shared": [True, False], "fPIC": [True, False], "with_clang_tidy": [True, False]}
+    default_options = {"shared": False, "fPIC": True, "with_clang_tidy": False}
     exports_sources = [ "lib/*", "host/*", "test/*", "CMakeLists.txt" ]
 
 
@@ -19,18 +19,17 @@ class TemplateConanFile(ConanFile):
     def requirements(self):
         self.test_requires("gtest/1.14.0")
 
-
     def layout(self):
         cmake_layout(self)
-
 
     def generate(self):
         tc = CMakeToolchain(self)
         tc.presets_prefix = "iconan"
+        if self.options.with_clang_tidy:
+            tc.cache_variables["USE_CLANG_TIDY"] = "ON"
         tc.generate()
         deps = CMakeDeps(self)
         deps.generate()
-        cmake = CMake(self)
     
     def build(self):
         cmake = CMake(self)
